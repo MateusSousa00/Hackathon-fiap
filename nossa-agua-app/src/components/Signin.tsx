@@ -82,7 +82,7 @@ export default function SignIn(){
     .then(() => router.replace('/home'))
     .catch(() => {
       setIsLoading(false)
-      toast.error('Login Invalido', {theme: 'colored'})
+      toast.error('Cadastro Invalido', {theme: 'colored'})
     })
   }
 
@@ -90,67 +90,63 @@ export default function SignIn(){
 
   return (
     <FormProvider {...signInForm}>
-          <form onSubmit={handleSubmit(handleLogin)}>
-            {/* Personal Data */}
-            <div className="py-9 text-[1rem] font-[400]">
-              <h2 className="py-5 pt-3 text-2xl font-bold text-[#4143FF]">
-                teste só para aparecer
-              </h2>
-
-              <Input.Field>
-                <Input.Label>CPF</Input.Label>
-                <Input.Root
-                  placeholder='000.000.000-00'
-                  name="CPF"
+      <form onSubmit={handleSubmit(handleLogin)}>
+        {/* Personal Data */}
+        <div className="py-9 text-[1rem] font-[400]">
+          <h2 className="py-5 pt-3 text-2xl font-bold text-[#000]">
+            teste só para aparecer
+          </h2>
+          <Input.Field>
+            <Input.Label>CPF</Input.Label>
+            <Input.Root
+              placeholder='000.000.000-00'
+              name="CPF"
+            />
+            <Input.ErrorMessage field="CPF" />
+          </Input.Field>
+          <Input.Field>
+            <Input.Label>Nome</Input.Label>
+            <Input.Root
+              placeholder='Nome'
+              name="name"
+            />
+            <Input.ErrorMessage field="name" />
+          </Input.Field>
+          <Input.Field>
+            <Input.Label>Telefone</Input.Label>
+            <div className="flex space-x-2">
+              <div className="flex-1">
+                <input
+                  {...register('phone', {
+                    onChange(e) {
+                      formatPhone(e)
+                    },
+                  })}
+                  type="tel"
+                  name="phone"
+                  placeholder="(11) 98457-1020"
+                  className="w-full appearance-none rounded border border-zinc-300 px-5 py-2 text-black placeholder:text-gray-200 focus:border-blue focus:shadow-blue focus:outline-none"
                 />
-                <Input.ErrorMessage field="CPF" />
-              </Input.Field>
-
-              <Input.Field>
-                <Input.Label>Nome</Input.Label>
-                <Input.Root
-                  placeholder='Nome'
-                  name="name"
-                />
-                <Input.ErrorMessage field="name" />
-              </Input.Field>
-
-              <Input.Field>
-                <Input.Label>Telefone</Input.Label>
-                <div className="flex space-x-2">
-                  <div className="flex-1">
-                    <input
-                      {...register('phone', {
-                        onChange(e) {
-                          formatPhone(e)
-                        },
-                      })}
-                      type="tel"
-                      name="phone"
-                      placeholder="(11) 98457-1020"
-                      className="w-full appearance-none rounded border border-zinc-300 px-5 py-2 text-black placeholder:text-gray-200 focus:border-blue focus:shadow-blue focus:outline-none"
-                    />
-                    <Input.ErrorMessage field="phone" />
-                  </div>
-                </div>
-                {/* <div className="flex space-x-4"></div> */}
-              </Input.Field>
+                <Input.ErrorMessage field="phone" />
+              </div>
             </div>
-
-            
-            {/* Send Information */}
-            <div className="flex justify-between">
-              <Button
-                className="w-full xs:w-28"
-                disabled={isLoading || isCepInputFocused}
-                onClick={isNull}
-                type="submit"
-              >
-                Criar
-              </Button>
-            </div>
-          </form>
-        </FormProvider>
+            {/* <div className="flex space-x-4"></div> */}
+          </Input.Field>
+        </div>
+        
+        {/* Send Information */}
+        <div className="flex justify-between">
+          <Button
+            className="w-full xs:w-28"
+            disabled={isLoading || isCepInputFocused}
+            onClick={isNull}
+            type="submit"
+          >
+            Criar
+          </Button>
+        </div>
+      </form>
+    </FormProvider>
   )
 }
 

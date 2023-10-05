@@ -7,10 +7,13 @@ import { useRouter } from 'next/navigation'
 import { useState, KeyboardEvent, ChangeEvent, ClipboardEvent } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import Button from './Button'
+import router from 'next/router'
 
 export default function Address(){
   const [isCepInputFocused, setIsCepInputFocused] = useState(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { createAddress } = func()
 
   type AddressFormData = {
     cep: string;
@@ -91,83 +94,125 @@ export default function Address(){
     e.preventDefault()
   }
 
+  const isNull = () => {
+    if (Object.keys(errors).length > 0) {
+      toast.error('Preencha os campos obrigatórios!')
+    }
+  }
+
+  const handleAddress = async (data: AddressFormData) => {
+    setIsLoading(true)
+    await createAddress({
+      cep: data.cep,
+      street: data.street,
+      number: data.number,
+      complement: data.complement,
+      neighborhood: data.neighborhood,
+    })
+    .then(() => router.replace('/home'))
+    .catch(() => {
+      setIsLoading(false)
+      toast.error('Endereço Invalido', {theme: 'colored'})
+    })
+  }
+
 
   return (
-    <div className="py-9 text-[1rem] font-[400]">
-    <h2 className=" py-5 pt-3 text-2xl font-bold text-[#4143FF]">
-      Endereço
-    </h2>
-    <div className="flex flex-row justify-between">
-      <Input.Field>
-        <Input.Label>
-          CEP
-        </Input.Label>
-        <Input.Root
-          type="tel"
-          inputMode="decimal"
-          onKeyDown={handleKeyDown}
-          onBlur={(e) => {
-            setIsCepInputFocused(false)
-            checkCep(e)
-          }}
-          onFocus={() => setIsCepInputFocused(true)}
-          onPaste={handlePaste}
-          placeholder="00000-000"
-          name="zipcode"
-        />
-        <Input.ErrorMessage field="zipcode" />
-      </Input.Field>
-      <p className="pt-4 text-zinc-400 underline">
-        <a
-          className="whitespace-nowrap"
-          target="_blank"
-          href="https://buscacepinter.correios.com.br/app/endereco/"
-        >
-          Não sei meu cep
-        </a>
-      </p>
-    </div>
+    <FormProvider {...addressForm}>
+      <form onSubmit={handleSubmit(handleAddress)}>
+            
+        
+        <h2 className=" py-5 pt-3 text-2xl font-bold text-[#000]">
+          Endereço
+        </h2>
+        <div className="flex flex-row justify-between">
+          <Input.Field>
+            <Input.Label>
+              CEP
+            </Input.Label>
+            <Input.Root
+              type="tel"
+              inputMode="decimal"
+              onKeyDown={handleKeyDown}
+              onBlur={(e) => {
+                setIsCepInputFocused(false)
+                checkCep(e)
+              }}
+              onFocus={() => setIsCepInputFocused(true)}
+              onPaste={handlePaste}
+              placeholder="00000-000"
+              name="zipcode"
+            />
+            <Input.ErrorMessage field="zipcode" />
+          </Input.Field>
+          <p className="pt-4 text-zinc-400 underline">
+            <a
+              className="whitespace-nowrap"
+              target="_blank"
+              href="https://buscacepinter.correios.com.br/app/endereco/"
+            >
+              Não sei meu cep
+            </a>
+          </p>
+        </div>
+            
+        <Input.Field>
+          <Input.Label>
+            Logradouro
+          </Input.Label>
+          <Input.Root
+            placeholder="Rua, Avenida, Estrada, Praça..."
+            name="address"
+          />
+          <Input.ErrorMessage field="address" />
+        </Input.Field>
+            
+        <Input.Field>
+          <Input.Label>
+            Numero
+          </Input.Label>
+          <Input.Root
+            placeholder="43"
+            name="number"
+          />
+          <Input.ErrorMessage field="number" />
+        </Input.Field>
+            
+        <Input.Field>
+          <Input.Label>
+            Bairro
+          </Input.Label>
+          <Input.Root
+            placeholder="Jardim Santa Lucia"
+            name="neighborhood"
+          />
+          <Input.ErrorMessage field="neighborhood" />
+        </Input.Field>
+            
+        <Input.Field>
+          <Input.Label>
+            Complemento
+          </Input.Label>
+          <Input.Root placeholder="Condominio das Flores" name="complement" />
+          <Input.ErrorMessage field="complement" />
+        </Input.Field>
 
-    <Input.Field>
-      <Input.Label>
-        Logradouro
-      </Input.Label>
-      <Input.Root
-        placeholder="Rua, Avenida, Estrada, Praça..."
-        name="address"
-      />
-      <Input.ErrorMessage field="address" />
-    </Input.Field>
-
-    <Input.Field>
-      <Input.Label>
-        Numero
-      </Input.Label>
-      <Input.Root
-        placeholder="43"
-        name="number"
-      />
-      <Input.ErrorMessage field="number" />
-    </Input.Field>
-
-    <Input.Field>
-      <Input.Label>
-        Bairro
-      </Input.Label>
-      <Input.Root
-        placeholder="Jardim Santa Lucia"
-        name="neighborhood"
-      />
-      <Input.ErrorMessage field="neighborhood" />
-    </Input.Field>
-
-    <Input.Field>
-      <Input.Label>
-        Complemento
-      </Input.Label>
-      <Input.Root placeholder="Condominio das Flores" name="complement" />
-      <Input.ErrorMessage field="complement" />
-    </Input.Field>
-  </div>
+            {/* Send Information */}
+          <div className="flex justify-between">
+              <Button
+                className="w-full xs:w-28"
+                disabled={isLoading || isCepInputFocused}
+                onClick={isNull}
+                type="submit"
+              >
+                Criar
+              </Button>
+          </div>
+        </form>
+      </FormProvider>
   )
+}
+
+function func(): any {
+  return "eae blz"
 }
