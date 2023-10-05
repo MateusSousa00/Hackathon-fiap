@@ -1,26 +1,28 @@
 'use client'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import router from 'next/router'
+import { ChangeEvent, ClipboardEvent, KeyboardEvent, useState } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+
 import { Input } from '@/components/Input/Index'
 import Loading from '@/components/Loading'
 import { api } from '@/server/api'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import { useState, KeyboardEvent, ChangeEvent, ClipboardEvent } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
-import Button from './Button'
-import router from 'next/router'
 
-export default function Address(){
+import Button from './Button'
+
+export default function Address() {
   const [isCepInputFocused, setIsCepInputFocused] = useState(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const { createAddress } = func()
 
   type AddressFormData = {
-    cep: string;
-    street: string;
-    number: string;
-    complement: string;
-    neighborhood: string;
+    cep: string
+    street: string
+    number: string
+    complement: string
+    neighborhood: string
   }
 
   const addressForm = useForm<AddressFormData>()
@@ -34,7 +36,6 @@ export default function Address(){
     clearErrors,
     register,
   } = addressForm
-
 
   // Validação Cep
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
@@ -81,7 +82,7 @@ export default function Address(){
     } catch (error) {
       setError('cep', {
         type: 'manual',
-        message: "Cep Inválido.",
+        message: 'Cep Inválido.',
       })
       setValue('street', '')
       setValue('neighborhood', '')
@@ -90,7 +91,7 @@ export default function Address(){
     }
   }
 
-  function handlePaste(e: ClipboardEvent<HTMLInputElement>){
+  function handlePaste(e: ClipboardEvent<HTMLInputElement>) {
     e.preventDefault()
   }
 
@@ -109,27 +110,20 @@ export default function Address(){
       complement: data.complement,
       neighborhood: data.neighborhood,
     })
-    .then(() => router.replace('/home'))
-    .catch(() => {
-      setIsLoading(false)
-      toast.error('Endereço Invalido', {theme: 'colored'})
-    })
+      .then(() => router.replace('/home'))
+      .catch(() => {
+        setIsLoading(false)
+        toast.error('Endereço Invalido', { theme: 'colored' })
+      })
   }
-
 
   return (
     <FormProvider {...addressForm}>
       <form onSubmit={handleSubmit(handleAddress)}>
-            
-        
-        <h2 className=" py-5 pt-3 text-2xl font-bold text-[#000]">
-          Endereço
-        </h2>
+        <h2 className=" py-5 pt-3 text-2xl font-bold text-[#000]">Endereço</h2>
         <div className="flex flex-row justify-between">
           <Input.Field>
-            <Input.Label>
-              CEP
-            </Input.Label>
+            <Input.Label>CEP</Input.Label>
             <Input.Root
               type="tel"
               inputMode="decimal"
@@ -155,64 +149,50 @@ export default function Address(){
             </a>
           </p>
         </div>
-            
+
         <Input.Field>
-          <Input.Label>
-            Logradouro
-          </Input.Label>
+          <Input.Label>Logradouro</Input.Label>
           <Input.Root
             placeholder="Rua, Avenida, Estrada, Praça..."
             name="address"
           />
           <Input.ErrorMessage field="address" />
         </Input.Field>
-            
+
         <Input.Field>
-          <Input.Label>
-            Numero
-          </Input.Label>
-          <Input.Root
-            placeholder="43"
-            name="number"
-          />
+          <Input.Label>Numero</Input.Label>
+          <Input.Root placeholder="43" name="number" />
           <Input.ErrorMessage field="number" />
         </Input.Field>
-            
+
         <Input.Field>
-          <Input.Label>
-            Bairro
-          </Input.Label>
-          <Input.Root
-            placeholder="Jardim Santa Lucia"
-            name="neighborhood"
-          />
+          <Input.Label>Bairro</Input.Label>
+          <Input.Root placeholder="Jardim Santa Lucia" name="neighborhood" />
           <Input.ErrorMessage field="neighborhood" />
         </Input.Field>
-            
+
         <Input.Field>
-          <Input.Label>
-            Complemento
-          </Input.Label>
+          <Input.Label>Complemento</Input.Label>
           <Input.Root placeholder="Condominio das Flores" name="complement" />
           <Input.ErrorMessage field="complement" />
         </Input.Field>
 
-            {/* Send Information */}
-          <div className="flex justify-between">
-              <Button
-                className="w-full xs:w-28"
-                disabled={isLoading || isCepInputFocused}
-                onClick={isNull}
-                type="submit"
-              >
-                Criar
-              </Button>
-          </div>
-        </form>
-      </FormProvider>
+        {/* Send Information */}
+        <div className="flex justify-between">
+          <Button
+            className="w-full xs:w-28"
+            disabled={isLoading || isCepInputFocused}
+            onClick={isNull}
+            type="submit"
+          >
+            Criar
+          </Button>
+        </div>
+      </form>
+    </FormProvider>
   )
 }
 
 function func(): any {
-  return "eae blz"
+  return 'eae blz'
 }

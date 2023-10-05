@@ -18,7 +18,7 @@ export default function Button({
     <button
       onClick={onclick}
       className={twMerge(
-        `h-10 w-full max-w-[12.5rem] rounded bg-gradient py-1 uppercase leading-relaxed text-white transition-all hover:bg-gray-900 hover:opacity-75 focus:ring-2 ${extraStyling}`,
+        `h-10 w-full max-w-[12.5rem] rounded bg-gradient py-1 uppercase leading-relaxed text-white transition-all hover:green-300 hover:opacity-75 focus:ring-2 ${extraStyling}`,
         className,
       )}
       {...rest}

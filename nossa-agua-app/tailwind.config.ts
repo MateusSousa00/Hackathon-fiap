@@ -12,7 +12,7 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        gradient: 'linear-gradient(180deg, #08979D 0%, #02457C 100%)'
+        gradient: 'linear-gradient(180deg, #08979D 0%, #02457C 100%)',
       },
       fontFamily: {
         sans: 'var (--font-space-grotesk)',
@@ -21,17 +21,15 @@ const config: Config = {
         blue: {
           300: '#008ABA',
           500: '#02457C',
-          700: '#021948'
+          700: '#021948',
         },
         green: {
           300: '#6EC6CA',
           500: '#08979D',
-          700: '#055B5C'
-        }
+          700: '#055B5C',
+        },
       },
-      
     },
-    
   },
   plugins: [],
 }

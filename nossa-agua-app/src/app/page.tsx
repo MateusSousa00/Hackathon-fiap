@@ -1,50 +1,79 @@
 'use client'
 import Image from 'next/image'
-import waterLogoIcon from '../icons/water-logo.svg'
-import Login from '@/components/Login'
-import SignIn from '@/components/Signin'
-import Address from '@/components/Address'
 import { useState } from 'react'
 
-export default function Home() {
-  const [selectedComponent, setSelectedComponent] = useState<ComponentType | null>(
-    null
-  );
+import Address from '@/components/Address'
+import Button from '@/components/Button'
+import Login from '@/components/Login'
+import SignIn from '@/components/Signin'
 
-  type ComponentType = 'Login' | 'SignIn';
+import waterLogoIcon from '../icons/water-logo.svg'
+
+export default function Home() {
+  const [selectedComponent, setSelectedComponent] =
+    // eslint-disable-next-line no-use-before-define
+    useState<ComponentType | null>(null)
+
+  const [divClassType, setDivClassType] = useState('flex-col')
+  const [changeHeight, setChangeHeight] = useState('h-screen')
+
+  type ComponentType = 'Login' | 'SignIn'
 
   const renderComponent = (component: ComponentType) => {
-    setSelectedComponent(component);
-  };
-  
+    setSelectedComponent(component)
+    setChangeHeight('h-full')
+    if (component === 'Login') {
+      setDivClassType('flex-col')
+    } else {
+      setDivClassType('flex-row items-center justify-between px-12')
+    }
+  }
+
   return (
-    <div className='bg-gradient h-screen'>
-      <div className='pt-8 flex flex-col items-center'>
-        <Image src={waterLogoIcon} alt='Nossa Agua' />
-        <h1 className='text-2xl'>Nossa Água</h1>
-        <p>Quanto mais, melhor!</p>
-
-      </div>
-      {selectedComponent === null && (
-        <>
-          <div className='flex flex-col items-center h-full justify-center'>
-            {/* Buttons to toggle between Login and SignIn */}
-            <button onClick={() => renderComponent('Login')}>Login</button>
-            <button onClick={() => renderComponent('SignIn')}>SignIn</button>
+    <div className={`bg-blue-500 ${changeHeight}`}>
+      <div className={`flex ${divClassType}`}>
+        {selectedComponent === 'SignIn' && (
+          <div className="flex flex-col items-start">
+            <Image src={waterLogoIcon} alt="Nossa Agua" />
+            <div className="my-10 flex flex-col items-center">
+              <h1 className="text-2xl text-bold">Nossa Água</h1>
+              <p>Quanto mais, melhor!</p>
+            </div>
           </div>
-        </>
-      )}
-      
+        )}
+        {selectedComponent !== 'SignIn' && (
+          <div className="pt-8 flex flex-col items-center">
+            <Image src={waterLogoIcon} alt="Nossa Agua" />
+            <div className="my-10 flex flex-col items-center">
+              <h1 className="text-2xl text-bold">Nossa Água</h1>
+              <p>Quanto mais, melhor!</p>
+            </div>
+          </div>
+        )}
+        {selectedComponent === null && (
+          <>
+            <div className="flex flex-col items-center h-full justify-center mt-40 gap-12">
+              {/* Buttons to toggle between Login and SignIn */}
+              <Button
+                className="w-full xs:w-28"
+                onClick={() => renderComponent('Login')}
+              >
+                Login
+              </Button>
+              <Button
+                className="w-full xs:w-28"
+                onClick={() => renderComponent('SignIn')}
+              >
+                SignIn
+              </Button>
+            </div>
+          </>
+        )}
 
-      {/* Render the selected component */}
-      {selectedComponent === 'Login' && <Login />}
-      {selectedComponent === 'SignIn' && (
-        <>
-          <SignIn />
-          <Address />
-        </>
-      )}
+        {/* Render the selected component */}
+        {selectedComponent === 'Login' && <Login />}
+        {selectedComponent === 'SignIn' && <SignIn />}
+      </div>
     </div>
-  );
+  )
 }
-
