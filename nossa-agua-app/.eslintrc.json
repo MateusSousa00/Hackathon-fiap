@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "@rocketseat/eslint-config/next",
+    "next/core-web-vitals",
+    "plugin:json/recommended"
+  ],
+  "plugins": [
+    "simple-import-sort"
+  ],
+  "rules": {
+    "simple-import-sort/imports": "error"
+  }
+}
