@@ -1,9 +1,14 @@
 # Hackathon FIAP / PASSOS MÁGICOS
 
 Este projeto MVP faz parte do Hackathon da [FIAP](https://www.fiap.com.br/) com parceria da [Passos Mágicos](https://passosmagicos.org.br/) sobre o Município de Embu Guaçu
+
+# Sobre o Projeto
+
+Imagine morar em uma cidade onde chove 70% dos dias do ano porém grande parte da população não tem acesso a água com qualidade? Nós viemos para mudar essa história.
+
 # Frontend:
 
-O frontend encontra-se na pasta `frontend`
+O frontend encontra-se na pasta `nossa-agua-app`
 
 ## Foram utilizados as Tecnologias abaixo:
 
@@ -30,7 +35,7 @@ O frontend encontra-se na pasta `frontend`
 
 # Backend:
 
-O backend encontra-se na pasta `server` no nosso projeto.
+O backend encontra-se na pasta `nossa-agua-api` no nosso projeto.
 
 ## Foram utilizados as Tecnologias abaixo:
 
