@@ -35,7 +35,7 @@ O frontend encontra-se na pasta `nossa-agua-app`
 
 # Backend:
 
-O backend encontra-se na pasta `nossa-agua-api` no nosso projeto.
+O backend encontra-se neste [link](https://github.com/MateusSousa00/Hackathon-fiap-api)
 
 ## Foram utilizados as Tecnologias abaixo:
 
