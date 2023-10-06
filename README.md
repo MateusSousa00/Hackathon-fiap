@@ -1,6 +1,9 @@
-# Frontend:
+# Hackathon FIAP / PASSOS MÁGICOS
 
 Este projeto MVP faz parte do Hackathon da [FIAP](https://www.fiap.com.br/) com parceria da [Passos Mágicos](https://passosmagicos.org.br/) sobre o Município de Embu Guaçu
+# Frontend:
+
+O frontend encontra-se na pasta `frontend`
 
 ## Foram utilizados as Tecnologias abaixo:
 
@@ -27,7 +30,7 @@ Este projeto MVP faz parte do Hackathon da [FIAP](https://www.fiap.com.br/) com 
 
 # Backend:
 
-Este é o backend da nossa aplicação.
+O backend encontra-se na pasta `server` no nosso projeto.
 
 ## Foram utilizados as Tecnologias abaixo:
 
