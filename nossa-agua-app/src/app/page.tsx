@@ -2,7 +2,6 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
-import Address from '@/components/Address'
 import Button from '@/components/Button'
 import Login from '@/components/Login'
 import SignIn from '@/components/Signin'
@@ -21,7 +20,7 @@ export default function Home() {
 
   const renderComponent = (component: ComponentType) => {
     setSelectedComponent(component)
-    setChangeHeight('h-full')
+    setChangeHeight('h-screen')
     if (component === 'Login') {
       setDivClassType('flex-col')
     } else {
@@ -36,8 +35,8 @@ export default function Home() {
           <div className="flex flex-col items-start">
             <Image src={waterLogoIcon} alt="Nossa Agua" />
             <div className="my-10 flex flex-col items-center">
-              <h1 className="text-2xl text-bold">Nossa Água</h1>
-              <p>Quanto mais, melhor!</p>
+              <h1 className="text-3xl font-extrabold">Nossa Água</h1>
+              <p className="font-bold">Quanto mais, melhor!</p>
             </div>
           </div>
         )}
@@ -45,8 +44,8 @@ export default function Home() {
           <div className="pt-8 flex flex-col items-center">
             <Image src={waterLogoIcon} alt="Nossa Agua" />
             <div className="my-10 flex flex-col items-center">
-              <h1 className="text-2xl text-bold">Nossa Água</h1>
-              <p>Quanto mais, melhor!</p>
+              <h1 className="text-3xl font-extrabold">Nossa Água</h1>
+              <p className="font-bold">Quanto mais, melhor!</p>
             </div>
           </div>
         )}

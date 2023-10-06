@@ -13,7 +13,6 @@ import Button from './Button'
 export default function SignIn() {
   const [isLoading, setIsLoading] = useState(false)
   const [isCepInputFocused, setIsCepInputFocused] = useState(false)
-  const { signIn } = func()
   const router = useRouter()
 
   type SignInFormData = {
@@ -74,17 +73,7 @@ export default function SignIn() {
 
   const handleLogin = async (data: SignInFormData) => {
     setIsLoading(true)
-    await signIn({
-      cpf: data.cpf,
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-    })
-      .then(() => router.replace('/home'))
-      .catch(() => {
-        setIsLoading(false)
-        toast.error('Cadastro Invalido', { theme: 'colored' })
-      })
+    router.replace('/relatorio')
   }
 
   // GET cep
@@ -134,7 +123,7 @@ export default function SignIn() {
   return (
     <FormProvider {...signInForm}>
       <form
-        className="flex flex-col pt-6 items-center"
+        className="flex flex-col pt-2 pb-5 items-center"
         onSubmit={handleSubmit(handleLogin)}
       >
         {/* Personal Data */}
@@ -245,8 +234,4 @@ export default function SignIn() {
       </form>
     </FormProvider>
   )
-}
-
-function func(): any {
-  return 'eae blz'
 }

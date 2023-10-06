@@ -1,3 +1,7 @@
 export default function Obrigado() {
-  return <h1>hi pele king of the futebol</h1>
+  return (
+    <div className="bg-blue-500 h-screen flex justify-center items-center">
+      <h1 className="text-5xl font-bold">Obrigado, nos vemos amanhã!</h1>
+    </div>
+  )
 }

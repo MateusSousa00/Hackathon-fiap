@@ -3,17 +3,16 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
 
 import { Input } from '@/components/Input/Index'
 import Loading from '@/components/Loading'
 
 import eyeIcon from '../icons/eye.svg'
 import eyeCrossedIcon from '../icons/eye-crossed.svg'
+import Button from './Button'
 
 export default function Login() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
-  const { login } = func()
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
@@ -31,15 +30,7 @@ export default function Login() {
 
   const handleLogin = async (data: LoginFormData) => {
     setIsLoading(true)
-    await login({
-      testOne: data.email,
-      testTwo: data.password,
-    })
-      .then(() => router.replace('/home'))
-      .catch(() => {
-        setIsLoading(false)
-        toast.error('Login Invalido', { theme: 'colored' })
-      })
+    router.replace('/relatorio')
   }
 
   if (isLoading) return <Loading />
@@ -81,12 +72,13 @@ export default function Login() {
             </div>
             <Input.ErrorMessage field="password" />
           </Input.Field>
+          <div className="flex justify-between pt-4">
+            <Button className="w-full xs:w-28" type="submit">
+              Entrar
+            </Button>
+          </div>
         </form>
       </FormProvider>
     </div>
   )
-}
-
-function func(): any {
-  return 'eae blz'
 }
